@@ -113,9 +113,9 @@ public class ShareFile {
         }
         return result;
     }
-	public File getFile() {
-		return file;
-	}
+    public File getFile() {
+        return new File(this.getURI().getPath());
+    }
 
     public Uri getURI() {
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.content.FileProvider;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableMap;
@@ -38,7 +39,6 @@ public abstract class ShareIntent {
         if (ShareIntent.hasValidKey("message", options) && ShareIntent.hasValidKey("url", options)) {
             ShareFile fileShare = getFileShare(options);
             if(fileShare.isFile()) {
-                Uri uriFile = fileShare.getURI();
 				Uri uri = FileProvider.getUriForFile(reactContext, authority, fileShare.getFile());
                 this.getIntent().setType(fileShare.getType());
                 this.getIntent().putExtra(Intent.EXTRA_STREAM, uri);
@@ -50,7 +50,6 @@ public abstract class ShareIntent {
         } else if (ShareIntent.hasValidKey("url", options)) {
             ShareFile fileShare = getFileShare(options);
             if(fileShare.isFile()) {
-                Uri uriFile = fileShare.getURI();
 				Uri uri = FileProvider.getUriForFile(reactContext, authority, fileShare.getFile());
                 this.getIntent().setType(fileShare.getType());
                 this.getIntent().putExtra(Intent.EXTRA_STREAM, uri);
